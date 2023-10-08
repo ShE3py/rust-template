@@ -5,11 +5,11 @@ members = [
 resolver = "2"
 
 [workspace.package]
-{% endif %}{% unless workspace %}[package]
+{% else %}[package]
 name = "{{ project-name }}"
 description = "A blazingly fast empty crate!"
 version = "0.0.0"
-{% endunless %}authors = ["{{ authors }}"]
+{% endif %}authors = ["{{ authors }}"]
 repository = "https://github.com/{{ github }}/{{ project-name }}/"
 license = "MIT OR Apache-2.0"
 {% unless workspace %}categories = []
