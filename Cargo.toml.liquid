@@ -19,4 +19,6 @@ rust-version = "1.73"{% unless workspace %}
 publish = false
 
 [package.metadata.docs.rs]
+all-features = true
+targets = []
 rustdoc-args = ["--cfg", "nightlydoc"]{% endunless %}
