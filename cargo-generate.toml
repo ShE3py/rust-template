@@ -8,7 +8,7 @@ type = "bool"
 prompt = "Create a virtual workspace"
 
 [template]
-ignore = ["LICENSE", "README"]
+ignore = ["LICENSE", ".github/"]
 
 [conditional.'!workspace']
 ignore = ["{{ project-name }}/"]
