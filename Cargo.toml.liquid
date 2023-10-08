@@ -1,0 +1,22 @@
+{% if workspace %}[workspace]
+members = [
+    "{{ project-name }}",
+]
+resolver = "2"
+
+[workspace.package]
+{% endif %}{% unless workspace %}[package]
+name = "{{ project-name }}"
+description = "A blazingly fast empty crate!"
+version = "0.0.0"
+{% endunless %}authors = ["{{ authors }}"]
+repository = "https://github.com/{{ github }}/{{ project-name }}/"
+license = "MIT OR Apache-2.0"
+{% unless workspace %}categories = []
+keywords = []
+{% endunless %}edition = "2021"
+rust-version = "1.73"{% unless workspace %}
+publish = false
+
+[package.metadata.docs.rs]
+rustdoc-args = ["--cfg", "nightlydoc"]{% endunless %}

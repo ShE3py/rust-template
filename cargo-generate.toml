@@ -1,0 +1,20 @@
+[placeholders.github]
+type = "string"
+prompt = "GitHub username (or organization)"
+regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
+
+[placeholders.workspace]
+type = "bool"
+prompt = "Create a virtual workspace"
+
+[template]
+ignore = ["LICENSE", "README"]
+
+[conditional.'!workspace']
+ignore = ["{{ project-name }}/"]
+
+[conditional.'workspace']
+ignore = ["src/"]
+
+[conditional.'crate_type == "lib"']
+ignore = ["src/main.rs", "{{ project-name }}/src/main.rs"]
