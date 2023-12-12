@@ -8,8 +8,8 @@ resolver = "2"
 {% else %}[package]
 name = "{{ project-name }}"
 version = "0.0.0"
-{% endif %}authors = ["{{ authors }}"]
-repository = "https://github.com/{{ github }}/{{ project-name }}/"
+authors = ["{{ username }}"]
+{% endif %}repository = "https://github.com/{{ github }}/{{ project-name }}/"
 license = "MIT OR Apache-2.0"
 {% unless workspace %}categories = []
 keywords = []
