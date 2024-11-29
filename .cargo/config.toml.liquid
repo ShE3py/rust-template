@@ -1,6 +1,6 @@
 [build]
 rustflags = [
-	# Written for rustc 1.79.0 (129f3b996 2024-06-10)
+	# Written for rustc 1.83.0 (90b35a623 2024-11-26)
 	# Allowed-by-default
 	"-Felided_lifetimes_in_paths", "-Wexplicit_outlives_requirements", "-Fffi_unwind_calls", "-Flet_underscore_drop",
 	"-Wmeta_variable_misuse", "-Fmissing_abi", "-Wmissing_debug_implementations", "-Fnon_ascii_idents", "-Wredundant_lifetimes",
@@ -19,7 +19,8 @@ rustflags = [
 	"-Fclippy::semicolon_outside_block", "-Fclippy::str_to_string", "-Fclippy::string_add", "-Wclippy::string_lit_chars_any",
 	"-Fclippy::string_to_string", "-Fclippy::try_err", "-Fclippy::undocumented_unsafe_blocks", "-Wclippy::unnecessary_safety_comment",
 	"-Wclippy::unnecessary_self_imports", "-Wclippy::unneeded_field_pattern", "-Fclippy::unseparated_literal_suffix",
-	"-Wclippy::verbose_file_reads",
+	"-Wclippy::verbose_file_reads", "-Wclippy::renamed_function_params", "-Wclippy::cfg_not_test", "-Fclippy::unused_result_ok",
+	"-Wclippy::unused_trait_names", "-Wclippy::non_zero_suggestions",
 
 	# Pedantic
 	"-Wclippy::assigning_clones", "-Wclippy::bool_to_int_with_if", "-Fclippy::borrow_as_ptr",
@@ -31,7 +32,7 @@ rustflags = [
 	"-Wclippy::inefficient_to_string", "-Wclippy::into_iter_without_iter", "-Wclippy::invalid_upcast_comparisons",
 	"-Wclippy::iter_filter_is_some", "-Wclippy::iter_filter_is_ok", "-Fclippy::iter_not_returning_iterator", "-Wclippy::iter_without_into_iter",
 	"-Wclippy::large_stack_arrays", "-Wclippy::large_types_passed_by_value", "-Wclippy::macro_use_imports", "-Wclippy::manual_assert",
-	"-Fclippy::manual_c_str_literals", "-Wclippy::manual_instant_elapsed", "-Wclippy::manual_is_variant_and", "-Wclippy::manual_let_else",
+	"-Wclippy::manual_instant_elapsed", "-Wclippy::manual_is_variant_and", "-Wclippy::manual_let_else",
 	"-Wclippy::manual_ok_or", "-Fclippy::manual_string_new", "-Wclippy::map_unwrap_or", "-Wclippy::match_bool", "-Wclippy::match_on_vec_items",
 	"-Wclippy::match_same_arms", "-Fclippy::match_wild_err_arm", "-Wclippy::match_wildcard_for_single_variants",
 	"-Wclippy::mismatching_type_param_order", "-Wclippy::module_name_repetitions", "-Wclippy::must_use_candidate", "-Wclippy::mut_mut",
@@ -40,11 +41,12 @@ rustflags = [
 	"-Fclippy::ptr_as_ptr", "-Fclippy::ptr_cast_constness", "-Wclippy::pub_underscore_fields", "-Wclippy::range_minus_one",
 	"-Wclippy::range_plus_one", "-Wclippy::redundant_closure_for_method_calls", "-Wclippy::redundant_else", "-Fclippy::ref_as_ptr",
 	"-Wclippy::ref_binding_to_reference", "-Wclippy::ref_option_ref", "-Wclippy::same_functions_in_if_condition",
-	"-Fclippy::semicolon_if_nothing_returned", "-Fclippy::should_panic_without_expect", "-Wclippy::similar_names", "-Wclippy::single_match_else",
+	"-Fclippy::semicolon_if_nothing_returned", "-Fclippy::should_panic_without_expect", "-Wclippy::similar_names",
 	"-Wclippy::stable_sort_primitive", "-Wclippy::string_add_assign", "-Wclippy::struct_field_names", "-Wclippy::str_split_at_newline",
 	"-Fclippy::transmute_ptr_to_ptr", "-Wclippy::trivially_copy_pass_by_ref", "-Fclippy::unicode_not_nfc", "-Wclippy::uninlined_format_args",
 	"-Wclippy::unnecessary_box_returns", "-Wclippy::unnecessary_join", "-Wclippy::unnecessary_wraps", "-Wclippy::unnested_or_patterns",
-	"-Fclippy::unsafe_derive_deserialize", "-Wclippy::zero_sized_map_values",
+	"-Fclippy::unsafe_derive_deserialize", "-Wclippy::zero_sized_map_values", "-Wclippy::assigning_clones", "-Wclippy::single_char_pattern",
+	"-Wclippy::manual_is_power_of_two", "-Wclippy::used_underscore_items", "-Wclippy::ref_option",
 
 	# Nursery
 	"-Fclippy::as_ptr_cast_mut", "-Wclippy::branches_sharing_code", "-Wclippy::clear_with_drain", "-Wclippy::cognitive_complexity",
@@ -58,7 +60,7 @@ rustflags = [
 	"-Wclippy::string_lit_as_bytes", "-Wclippy::suboptimal_flops", "-Wclippy::suspicious_operation_groupings", "-Wclippy::trailing_empty_array",
 	"-Wclippy::trait_duplication_in_bounds", "-Wclippy::transmute_undefined_repr", "-Wclippy::trivial_regex", "-Wclippy::tuple_array_conversions",
 	"-Wclippy::type_repetition_in_bounds", "-Fclippy::uninhabited_references", "-Wclippy::unnecessary_struct_initialization", "-Wclippy::unused_peekable",
-	"-Wclippy::unused_rounding", "-Wclippy::useless_let_if_seq",
+	"-Wclippy::unused_rounding", "-Wclippy::useless_let_if_seq", "-Wclippy::set_contains_or_insert",
 
 	# Cargo
 	"-Wclippy::multiple_crate_versions", "-Fclippy::negative_feature_names", "-Fclippy::redundant_feature_names", "-Fclippy::wildcard_dependencies"
