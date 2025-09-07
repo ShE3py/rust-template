@@ -2,10 +2,10 @@
 name = "{{ project-name }}"
 version = "0.0.0"
 authors = ["{{ username }}"]
-repository.workspace = true
-license.workspace = true
+repository = "https://github.com/{{ github }}/{{ project-name }}/"
+license = "{{ license }}"
 categories = []
 keywords = []
-edition.workspace = true
+edition = "2021"
 rust-version = "1.74"
 publish = false
