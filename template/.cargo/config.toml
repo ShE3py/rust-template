@@ -2,7 +2,7 @@
 rustflags = [
 	# Written for rustc 1.83.0 (90b35a623 2024-11-26)
 	# Allowed-by-default
-	"-Felided_lifetimes_in_paths", "-Wexplicit_outlives_requirements", "-Fffi_unwind_calls", "-Flet_underscore_drop",
+	"-Felided_lifetimes_in_paths", "-Wexplicit_outlives_requirements", "-Fffi_unwind_calls",
 	"-Wmeta_variable_misuse", "-Fmissing_abi", "-Wmissing_debug_implementations", "-Fnon_ascii_idents", "-Wredundant_lifetimes",
 	"-Wsingle_use_lifetimes", "-Funnameable_types", "-Wunreachable_pub", "-Wunsafe_op_in_unsafe_fn", "-Wunused_extern_crates",
 	"-Wunused_import_braces", "-Wunused_lifetimes", "-Wunused_qualifications",
@@ -45,7 +45,7 @@ rustflags = [
 	"-Wclippy::stable_sort_primitive", "-Wclippy::string_add_assign", "-Wclippy::struct_field_names", "-Wclippy::str_split_at_newline",
 	"-Fclippy::transmute_ptr_to_ptr", "-Wclippy::trivially_copy_pass_by_ref", "-Fclippy::unicode_not_nfc", "-Wclippy::uninlined_format_args",
 	"-Wclippy::unnecessary_box_returns", "-Wclippy::unnecessary_join", "-Wclippy::unnecessary_wraps", "-Wclippy::unnested_or_patterns",
-	"-Fclippy::unsafe_derive_deserialize", "-Wclippy::zero_sized_map_values", "-Wclippy::assigning_clones", "-Wclippy::single_char_pattern",
+	"-Fclippy::unsafe_derive_deserialize", "-Wclippy::zero_sized_map_values", "-Wclippy::single_char_pattern",
 	"-Wclippy::manual_is_power_of_two", "-Wclippy::used_underscore_items", "-Wclippy::ref_option",
 
 	# Nursery

@@ -7,9 +7,6 @@ regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
 type = "bool"
 prompt = "Create a virtual workspace"
 
-[template]
-ignore = ["LICENSE", ".github/", ".gitattributes"]
-
 [conditional.'!workspace']
 ignore = ["{{ project-name }}/"]
 

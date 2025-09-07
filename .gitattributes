@@ -1,3 +1,0 @@
-*.rs.liquid linguist-language=Rust
-*.toml.liquid linguist-language=TOML
-.gitignore.liquid linguist-language=Ignore-List
