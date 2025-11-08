@@ -1,19 +1,8 @@
-[placeholders.github]
-type = "string"
-prompt = "GitHub username (or organization)"
-regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
-
 [placeholders.license]
 type = "string"
 prompt = "License"
-choices = ["MIT OR Apache-2.0", "AGPL-3.0-or-later"]
-default = "MIT OR Apache-2.0"
+choices = ["AGPL", "GPL", "LGPL", "MIT OR Apache", "MIT"]
+default = "MIT OR Apache"
 
-[conditional.'crate_type == "lib"']
-ignore = ["src/main.rs"]
-
-[conditional.'license != "AGPL-3.0-or-later"']
-ignore = ["LICENSE"]
-
-[conditional.'license != "MIT OR Apache-2.0"']
-ignore = ["LICENSE-MIT", "LICENSE-APACHE"]
+[hooks]
+pre = ["license.rhai"]
