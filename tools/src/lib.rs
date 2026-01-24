@@ -43,7 +43,7 @@ pub type LintStore = BTreeMap<String, LintLevel>;
 pub fn parse(path: impl AsRef<Path>) -> LintStore {
     let mut store = LintStore::new();
     
-    for ln in BufReader::new(File::open(path).expect("fopen")).lines().map(|ln| ln.expect("fget")) {
+    for ln in BufReader::new(File::open(Path::new("../").join(path)).expect("fopen")).lines().map(|ln| ln.expect("fget")) {
         let Some((lint, level)) = ln.split_once('=') else {
             panic!("malformed line: {ln}");
         };

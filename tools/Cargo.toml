@@ -9,3 +9,6 @@ keywords = []
 edition = "2024"
 rust-version = "1.85"
 publish = false
+
+[[bin]]
+name = "reflag"
