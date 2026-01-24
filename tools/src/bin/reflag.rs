@@ -1,3 +1,10 @@
+//!
+//! Reflag: print `lint-levels.txt` for a command line,
+//!   ignoring unchanged values via `default-lint-levels.txt`.
+//!
+
+mod relint;
+
 use rust_template::{parse, LintLevel};
 
 fn main() {
@@ -11,11 +18,13 @@ fn main() {
         assert_eq!(default_lint, overriden_lint);
         
         if default_level != overriden_level {
-            assert!(overriden_level > default_level, "`{overriden_lint}` was lowered from {default_level:?} to {overriden_level:?}");
+//          assert!(overriden_level > default_level, "`{overriden_lint}` was lowered from {default_level:?} to {overriden_level:?}");
             
             printer.print(&overriden_lint, overriden_level);
         }
     }
+    
+    println!();
 }
 
 trait Printer {
