@@ -5,7 +5,7 @@
 
 mod relint;
 
-use rust_template::{parse, LintLevel};
+use rust_template::{is_stable, parse, LintLevel};
 
 fn main() {
     let defaults = parse("default-lint-levels.txt");
@@ -14,17 +14,30 @@ fn main() {
     // RustcPrinter, CargoConfigPrinter
     let mut printer = CargoConfigPrinter::default();
     
+    let mut skipped = Vec::new();
+    
     for ((default_lint, default_level), (overriden_lint, overriden_level)) in defaults.into_iter().zip(overrides) {
-        assert_eq!(default_lint, overriden_lint);
+        debug_assert_eq!(default_lint, overriden_lint);
         
         if default_level != overriden_level {
 //          assert!(overriden_level > default_level, "`{overriden_lint}` was lowered from {default_level:?} to {overriden_level:?}");
             
-            printer.print(&overriden_lint, overriden_level);
+            if !is_stable(&overriden_lint) {
+                skipped.push(overriden_lint);
+            }
+            else {
+                printer.print(&overriden_lint, overriden_level);
+            }
         }
     }
     
     println!();
+    
+    if !skipped.is_empty() {
+        eprintln!();
+        eprintln!("warn: skipped {} unstable lint{}:", skipped.len(), if skipped.len() == 1 { "" } else { "s" });
+        eprintln!("{}", skipped.join(", "));
+    }
 }
 
 trait Printer {

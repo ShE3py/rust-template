@@ -33,7 +33,7 @@ fn main() {
         };
         
         let Some(cur_value) = cur.get_mut(key) else {
-            eprintln!("error: lint {lint} with default value `{}` was neither added nor deleted, but is missing", new_value, lint = hyperlint(key, new_value));
+            eprintln!("error: lint {lint} with default value `{}` was neither added nor deleted, but it is missing", new_value, lint = hyperlint(key, new_value));
             ask(cur.entry(key.clone()).or_insert(new_value));
             continue
         };

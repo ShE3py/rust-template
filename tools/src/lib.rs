@@ -6,6 +6,7 @@ use std::fmt::Formatter;
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter};
 use std::path::Path;
+use std::process::{Command, Stdio};
 use std::str::FromStr;
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Copy, Clone)]
@@ -78,4 +79,20 @@ pub fn save(store: &LintStore, path: impl AsRef<Path>) -> io::Result<()> {
         writeln!(w, "{k}={v}")?;
     }
     Ok(())
+}
+
+pub fn is_stable(lint: &str) -> bool {
+    Command::new("clippy-driver")
+        .arg("+stable")
+        .arg("-Funknown_lints")
+        .arg(format!("-F{lint}"))
+        .arg("--crate-type=lib")
+        .arg("-o-")
+        .arg("-")
+        .stdin(Stdio::null())
+        .stderr(Stdio::null())
+        .stdout(Stdio::null())
+        .status()
+        .expect("could not spawn clippy-driver")
+        .success()
 }
