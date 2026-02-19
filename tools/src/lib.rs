@@ -42,7 +42,7 @@ impl PartialOrd for LintLevel {
             (Deny, Forbid) => Some(Ordering::Less),
             
             (Forbid, Forbid) => Some(Ordering::Equal),
-            (Forbid, _) => Some(Ordering::Less)
+            (Forbid, _) => Some(Ordering::Greater)
         }
     }
 }
