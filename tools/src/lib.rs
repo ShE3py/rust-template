@@ -68,6 +68,18 @@ impl LintLevel {
         }
     }
     
+    /// Relaxes [`Forbid`] to [`Deny`], and [`ForceWarn`]
+    /// to [`Warn`].
+    pub fn overridable(self) -> Self {
+        match self {
+            LintLevel::Allow => LintLevel::Allow,
+            LintLevel::Warn => LintLevel::Warn,
+            LintLevel::ForceWarn => LintLevel::Warn,
+            LintLevel::Deny => LintLevel::Deny,
+            LintLevel::Forbid => LintLevel::Deny,
+        }
+    }
+    
     pub fn as_arg(self, lint: &str) -> String {
         match self.letter() {
             Some(letter) => format!("-{letter}{lint}"),

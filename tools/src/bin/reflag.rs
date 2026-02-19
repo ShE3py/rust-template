@@ -20,8 +20,11 @@ fn main() {
     for ((default_lint, default_level), (overriden_lint, overriden_level)) in defaults.into_iter().zip(overrides) {
         debug_assert_eq!(default_lint, overriden_lint);
         
+        // Some macros uses `#[allow(lint_group)]`, wich won't compile otherwise
+        let overriden_level = overriden_level.overridable();
+        
         if default_level != overriden_level {
-//          assert!(overriden_level > default_level, "`{overriden_lint}` was lowered from {default_level:?} to {overriden_level:?}");
+            assert!(default_level <= overriden_level, "`{overriden_lint}` was relaxed from {default_level:?} to {overriden_level:?}");
             
             if !is_stable(&overriden_lint) {
                 skipped.push(overriden_lint);
