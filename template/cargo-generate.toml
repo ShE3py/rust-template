@@ -1,7 +1,7 @@
 [placeholders.license]
 type = "string"
 prompt = "License"
-choices = ["AGPL", "GPL", "LGPL", "MIT OR Apache", "MIT"]
+choices = ["EUPL", "MIT OR Apache", "MIT", "AGPL", "LGPL", "GPL"]
 default = "MIT OR Apache"
 
 [hooks]
