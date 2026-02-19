@@ -5,7 +5,7 @@
 
 mod relint;
 
-use rust_template::{is_stable, parse, LintLevel};
+use rust_template::{is_stable, parse, version, LintLevel};
 
 fn main() {
     let defaults = parse("default-lint-levels.txt");
@@ -13,6 +13,7 @@ fn main() {
     
     // RustcPrinter, CargoConfigPrinter
     let mut printer = CargoConfigPrinter::default();
+    printer.print_banner();
     
     let mut skipped = Vec::new();
     
@@ -41,6 +42,7 @@ fn main() {
 }
 
 trait Printer {
+    fn print_banner(&mut self);
     fn print(&mut self, lint: &str, level: LintLevel);
 }
 
@@ -64,6 +66,10 @@ impl Default for CargoConfigPrinter {
 }
 
 impl Printer for CargoConfigPrinter {
+    fn print_banner(&mut self) {
+        print!("# Written for {}", version());
+    }
+    
     fn print(&mut self, lint: &str, level: LintLevel) {
         let len = u16::try_from(match level.letter() {
             Some(_) => "-W".len(),
@@ -81,6 +87,8 @@ impl Printer for CargoConfigPrinter {
 }
 
 impl Printer for RustcPrinter {
+    fn print_banner(&mut self) {}
+    
     fn print(&mut self, lint: &str, level: LintLevel) {
         print!("{} ", level.as_arg(lint));
     }

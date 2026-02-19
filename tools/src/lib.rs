@@ -121,6 +121,18 @@ pub fn save(store: &LintStore, path: impl AsRef<Path>) -> io::Result<()> {
     Ok(())
 }
 
+/// Includes a trailing newline.
+pub fn version() -> String {
+    String::from_utf8(
+        Command::new("rustc")
+            .arg("+nightly")
+            .arg("-V")
+            .output()
+            .expect("could not spawn clippy-driver")
+            .stdout
+    ).expect("invalid utf8")
+}
+
 pub fn is_stable(lint: &str) -> bool {
     Command::new("clippy-driver")
         .arg("+stable")
