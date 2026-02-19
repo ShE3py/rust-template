@@ -65,7 +65,10 @@ impl Default for CargoConfigPrinter {
 
 impl Printer for CargoConfigPrinter {
     fn print(&mut self, lint: &str, level: LintLevel) {
-        let len = (r#""-W", "#.len() + lint.len()) as u16;
+        let len = u16::try_from(match level.letter() {
+            Some(_) => "-W".len(),
+            None => "--".len() + level.as_str().len() + '='.len_utf8(),
+        } + 2 * '"'.len_utf8() + lint.len() + ", ".len()).unwrap();
         
         if self.col + len > self.max_line_len {
             println!();
@@ -73,12 +76,12 @@ impl Printer for CargoConfigPrinter {
         }
         self.col += len;
         
-        print!(r#""-{letter}{lint}", "#, letter = level.letter());
+        print!("{:?}, ", level.as_arg(lint));
     }
 }
 
 impl Printer for RustcPrinter {
     fn print(&mut self, lint: &str, level: LintLevel) {
-        print!(r#"-{letter}{lint} "#, letter = level.letter());
+        print!("{} ", level.as_arg(lint));
     }
 }

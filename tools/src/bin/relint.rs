@@ -76,6 +76,7 @@ fn hyperlint(k: &str, v: LintLevel) -> String {
             match v {
                 LintLevel::Allow => "allowed",
                 LintLevel::Warn => "warn",
+                LintLevel::ForceWarn => unimplemented!(),
                 LintLevel::Deny => "deny",
                 LintLevel::Forbid => unimplemented!(),
             },
