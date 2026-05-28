@@ -21,7 +21,7 @@ fn main() {
         debug_assert_eq!(default_lint, overriden_lint);
         
         // Some macros uses `#[allow(lint_group)]`, wich won't compile otherwise
-        let overriden_level = overriden_level.overridable();
+        let overriden_level = overriden_level.relaxed();
         
         if default_level != overriden_level {
             assert!(default_level <= overriden_level, "`{overriden_lint}` was relaxed from {default_level:?} to {overriden_level:?}");

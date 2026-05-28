@@ -70,7 +70,7 @@ impl LintLevel {
     
     /// Relaxes [`Forbid`] to [`Deny`], and [`ForceWarn`]
     /// to [`Warn`].
-    pub fn overridable(self) -> Self {
+    pub fn relaxed(self) -> Self {
         match self {
             LintLevel::Allow => LintLevel::Allow,
             LintLevel::Warn => LintLevel::Warn,
@@ -137,10 +137,10 @@ pub fn save(store: &LintStore, path: impl AsRef<Path>) -> io::Result<()> {
 pub fn version() -> String {
     String::from_utf8(
         Command::new("rustc")
-            .arg("+nightly")
+            .arg("+stable")
             .arg("-V")
             .output()
-            .expect("could not spawn clippy-driver")
+            .expect("could not spawn rustc")
             .stdout
     ).expect("invalid utf8")
 }
