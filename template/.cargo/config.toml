@@ -1,6 +1,6 @@
 [build]
 rustflags = [
-    # Written for rustc 1.96.0 (ac68faa20 2026-05-25)
+    # Written for rustc 1.96.1 (31fca3adb 2026-06-26)
     "-Daarch64_softfloat_neon", "-Dambiguous_glob_imported_traits", "-Dambiguous_import_visibilities",
     "-Wambiguous_negative_literals", "-Dambiguous_panic_imports", "-Wclippy::alloc_instead_of_core",
     "-Wclippy::allow_attributes", "-Dclippy::as_pointer_underscore", "-Dclippy::as_underscore",
