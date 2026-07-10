@@ -14,6 +14,7 @@ cat > ../template/.cargo/config.toml << EOF
 [build]
 rustflags = [
 EOF
+echo
 cargo run --bin reflag | sed 's/^/    /' | sed 's/ $//' >> ../template/.cargo/config.toml
 echo ']' >> ../template/.cargo/config.toml
 

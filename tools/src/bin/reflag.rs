@@ -36,7 +36,6 @@ fn main() {
     println!();
     
     if !skipped.is_empty() {
-        eprintln!();
         eprintln!("warn: skipped {} unstable lint{}:", skipped.len(), if skipped.len() == 1 { "" } else { "s" });
         eprintln!("{}", skipped.join(", "));
     }
