@@ -17,7 +17,4 @@ It will ask for new lint levels as needed, e.g.:
 > default was relaxed from `deny` to `warn`, while current value is `deny`  
 > new value: deny  
 
-To get the updated `.cargo/config.toml`, run (in the `tools/` subfolder):
-```sh
-cargo run --bin reflag
-```
+The `.cargo/config.toml` will be updated accordingly.
