@@ -3,8 +3,6 @@
 //!   ignoring unchanged values via `default-lint-levels.txt`.
 //!
 
-mod relint;
-
 use rust_template::{is_stable, parse, version, LintLevel};
 
 fn main() {

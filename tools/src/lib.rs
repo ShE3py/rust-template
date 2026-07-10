@@ -1,11 +1,10 @@
 use std::io::Write;
 use std::collections::BTreeMap;
 use std::convert::Infallible;
-use std::{fmt, io};
 use std::cmp::Ordering;
-use std::fmt::Formatter;
+use std::fmt::{self, Formatter};
 use std::fs::File;
-use std::io::{BufRead, BufReader, BufWriter};
+use std::io::{self, BufRead, BufReader, BufWriter};
 use std::path::Path;
 use std::process::{Command, Stdio};
 use std::str::FromStr;

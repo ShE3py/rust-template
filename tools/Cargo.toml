@@ -13,6 +13,5 @@ publish = false
 [[bin]]
 name = "reflag"
 
-
 [[bin]]
 name = "relint"
