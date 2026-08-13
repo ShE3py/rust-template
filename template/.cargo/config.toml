@@ -1,6 +1,6 @@
 [build]
 rustflags = [
-    # Written for rustc 1.97.0 (2d8144b78 2026-07-07)
+    # Written for rustc 1.97.1 (8bab26f4f 2026-07-14)
     "-Daarch64_softfloat_neon", "-Dambiguous_glob_imported_traits", "-Dambiguous_import_visibilities",
     "-Wambiguous_negative_literals", "-Dambiguous_panic_imports", "-Wclippy::alloc_instead_of_core",
     "-Wclippy::allow_attributes", "-Dclippy::as_pointer_underscore", "-Dclippy::as_underscore",
@@ -38,9 +38,9 @@ rustflags = [
     "-Wclippy::needless_raw_strings", "-Wclippy::needless_type_cast", "-Dclippy::negative_feature_names",
     "-Wclippy::no_effect_underscore_binding", "-Wclippy::no_mangle_with_rust_abi", "-Dclippy::non_send_fields_in_send_ty",
     "-Wclippy::non_std_lazy_statics", "-Wclippy::non_zero_suggestions", "-Wclippy::nonminimal_bool",
-    "-Wclippy::nonstandard_macro_braces", "-Wclippy::option_as_ref_cloned", "-Wclippy::option_if_let_else",
-    "-Wclippy::option_option", "-Wclippy::overly_complex_bool_expr", "-Wclippy::path_buf_push_overwrite",
-    "-Wclippy::precedence_bits", "-Dclippy::ptr_as_ptr", "-Dclippy::ptr_cast_constness", "-Wclippy::ptr_offset_by_literal",
+    "-Wclippy::option_as_ref_cloned", "-Wclippy::option_if_let_else", "-Wclippy::option_option",
+    "-Wclippy::overly_complex_bool_expr", "-Wclippy::path_buf_push_overwrite", "-Wclippy::precedence_bits",
+    "-Dclippy::ptr_as_ptr", "-Dclippy::ptr_cast_constness", "-Wclippy::ptr_offset_by_literal",
     "-Wclippy::pub_underscore_fields", "-Wclippy::pub_without_shorthand", "-Wclippy::range_minus_one",
     "-Wclippy::range_plus_one", "-Wclippy::rc_buffer", "-Wclippy::rc_mutex", "-Wclippy::read_zero_byte_vec",
     "-Wclippy::redundant_clone", "-Wclippy::redundant_closure_for_method_calls", "-Wclippy::redundant_feature_names",
