@@ -73,5 +73,5 @@ rustflags = [
     "-Wclippy::unused_rounding", "-Wclippy::unused_self", "-Wclippy::unused_trait_names",
     "-Wclippy::used_underscore_binding", "-Wclippy::used_underscore_items", "-Wclippy::useless_let_if_seq",
     "-Wclippy::verbose_file_reads", "-Wclippy::volatile_composites", "-Dclippy::wildcard_dependencies",
-    "-Wclippy::with_capacity_zero", "-Wclippy::zero_sized_map_values",
+    "-Wclippy::with_capacity_zero", "-Wclippy::zero_sized_map_values", "-Wrustdoc::unescaped_backticks",
 ]

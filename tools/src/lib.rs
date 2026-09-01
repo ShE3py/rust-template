@@ -26,6 +26,7 @@ impl Lint {
     pub fn driver(&self) -> &str {
         match self.split().0 {
             "" => "rustc",
+            "rustdoc" => "rustdoc",
             "clippy" => "clippy-driver",
             _ => unimplemented!()
         }

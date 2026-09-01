@@ -83,9 +83,11 @@ fn hyperlint(k: &Lint, v: LintLevel) -> String {
             lint.replace('_', "-"),
         ),
         
+        ("rustdoc", lint) => format!("https://doc.rust-lang.org/nightly/rustdoc/lints.html#{lint}"),
+        
         ("clippy", lint) => format!("https://rust-lang.github.io/rust-clippy/master/index.html#{lint}"),
         
-        _ => format!("`{k}`"),
+        _ => return format!("`{k}`"),
     };
     
     format!("\u{1b}]8;;{url}\u{1b}\\`{k}`\u{1b}]8;;\u{1b}\\")
