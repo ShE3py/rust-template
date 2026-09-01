@@ -2,9 +2,8 @@
 //! Relint: interactively update outdated `default-lint-levels.txt`
 //!
 
-use rust_template::{parse, save, LintLevel};
-use std::io;
-use std::io::Write;
+use rust_template::{Lint, LintLevel, parse, save};
+use std::io::{self, Write};
 use std::str::FromStr;
 
 fn main() {
@@ -58,20 +57,21 @@ fn main() {
 fn ask(v: &mut LintLevel) {
     let mut buf = String::new();
     
-    loop {
-        print!("new value: ");
-        _ = io::stdout().flush();
-        io::stdin().read_line(&mut buf).unwrap();
+    print!("new value: ");
+    _ = io::stdout().flush();
+    io::stdin().read_line(&mut buf).unwrap();
+    let input = buf.trim_ascii_end();
+    
+    if !input.is_empty() {
         let Ok(parsed) = LintLevel::from_str(buf.trim_ascii_end());
         *v = parsed;
-        return;
     }
 }
 
 /// Prints lint name as an hyperlink.
-fn hyperlint(k: &str, v: LintLevel) -> String {
-    let url = match k.split_once("::") {
-        None => format!(
+fn hyperlint(k: &Lint, v: LintLevel) -> String {
+    let url = match k.split() {
+        ("", lint) => format!(
             "https://doc.rust-lang.org/nightly/rustc/lints/listing/{}-by-default.html#{}",
             match v {
                 LintLevel::Allow => "allowed",
@@ -80,10 +80,10 @@ fn hyperlint(k: &str, v: LintLevel) -> String {
                 LintLevel::Deny => "deny",
                 LintLevel::Forbid => unimplemented!(),
             },
-            k.replace('_', "-"),
+            lint.replace('_', "-"),
         ),
         
-        Some((namespace, lint)) if namespace == "clippy" => format!("https://rust-lang.github.io/rust-clippy/master/index.html#{lint}"),
+        ("clippy", lint) => format!("https://rust-lang.github.io/rust-clippy/master/index.html#{lint}"),
         
         _ => format!("`{k}`"),
     };

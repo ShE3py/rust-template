@@ -6,7 +6,8 @@ set -e
 diff <(wc -l < lint-levels.txt) <(wc -l < default-lint-levels.txt)
 
 # Update lint store
-clippy-driver +nightly -Z unstable-options --print=crate-root-lint-levels --edition=2024 /dev/null | sort > default-lint-levels.stdout
+rustc +nightly -Z unstable-options --print=crate-root-lint-levels --edition=2024 /dev/null | grep -v rustc | sort > default-lint-levels.stdout
+clippy-driver +nightly -Z unstable-options --print=crate-root-lint-levels --edition=2024 /dev/null | grep clippy | sort >> default-lint-levels.stdout
 cd tools
 cargo run --bin relint
 mv ../default-lint-levels.{stdout,txt}

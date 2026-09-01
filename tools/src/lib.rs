@@ -1,3 +1,4 @@
+use std::borrow::Borrow;
 use std::io::Write;
 use std::collections::BTreeMap;
 use std::convert::Infallible;
@@ -8,6 +9,58 @@ use std::io::{self, BufRead, BufReader, BufWriter};
 use std::path::Path;
 use std::process::{Command, Stdio};
 use std::str::FromStr;
+
+#[derive(Debug, Eq, PartialEq, Clone)]
+#[repr(transparent)]
+pub struct Lint(Box<str>);
+
+impl Lint {
+    pub const fn as_str(&self) -> &str {
+        &self.0
+    }
+    
+    pub fn split(&self) -> (&str, &str) {
+        self.0.split_once("::").unwrap_or(("", &self.0))
+    }
+    
+    pub fn driver(&self) -> &str {
+        match self.split().0 {
+            "" => "rustc",
+            "clippy" => "clippy-driver",
+            _ => unimplemented!()
+        }
+    }
+}
+
+impl Ord for Lint {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.split().cmp(&other.split())
+    }
+}
+
+impl PartialOrd for Lint {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl fmt::Display for Lint {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        fmt::Display::fmt(&self.0, f)
+    }
+}
+
+impl Borrow<str> for Lint {
+    fn borrow(&self) -> &str {
+        &self.0
+    }
+}
+
+impl AsRef<str> for Lint {
+    fn as_ref(&self) -> &str {
+        &self.0
+    }
+}
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
 pub enum LintLevel {
@@ -79,7 +132,7 @@ impl LintLevel {
         }
     }
     
-    pub fn as_arg(self, lint: &str) -> String {
+    pub fn as_arg(self, lint: &Lint) -> String {
         match self.letter() {
             Some(letter) => format!("-{letter}{lint}"),
             None => format!("--{}={lint}", self.as_str()),
@@ -108,7 +161,7 @@ impl FromStr for LintLevel {
     }
 }
 
-pub type LintStore = BTreeMap<String, LintLevel>;
+pub type LintStore = BTreeMap<Lint, LintLevel>;
 
 pub fn parse(path: impl AsRef<Path>) -> LintStore {
     let mut store = LintStore::new();
@@ -118,7 +171,7 @@ pub fn parse(path: impl AsRef<Path>) -> LintStore {
             panic!("malformed line: {ln}");
         };
         
-        store.insert(lint.to_owned(), LintLevel::from_str(level).unwrap());
+        store.insert(Lint(Box::from(lint)), LintLevel::from_str(level).unwrap());
     }
     
     store
@@ -144,8 +197,8 @@ pub fn version() -> String {
     ).expect("invalid utf8")
 }
 
-pub fn is_stable(lint: &str) -> bool {
-    Command::new("clippy-driver")
+pub fn is_stable(lint: &Lint) -> bool {
+    Command::new(lint.driver())
         .arg("+stable")
         .arg("-Funknown_lints")
         .arg(format!("-F{lint}"))
@@ -156,6 +209,6 @@ pub fn is_stable(lint: &str) -> bool {
         .stderr(Stdio::null())
         .stdout(Stdio::null())
         .status()
-        .expect("could not spawn clippy-driver")
+        .expect("could not spawn driver")
         .success()
 }

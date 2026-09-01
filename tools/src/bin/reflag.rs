@@ -3,7 +3,7 @@
 //!   ignoring unchanged values via `default-lint-levels.txt`.
 //!
 
-use rust_template::{is_stable, parse, version, LintLevel};
+use rust_template::{is_stable, parse, version, LintLevel, Lint};
 
 fn main() {
     let defaults = parse("default-lint-levels.txt");
@@ -43,7 +43,7 @@ fn main() {
 
 trait Printer {
     fn print_banner(&mut self);
-    fn print(&mut self, lint: &str, level: LintLevel);
+    fn print(&mut self, lint: &Lint, level: LintLevel);
 }
 
 #[allow(dead_code)]
@@ -70,11 +70,11 @@ impl Printer for CargoConfigPrinter {
         print!("# Written for {}", version());
     }
     
-    fn print(&mut self, lint: &str, level: LintLevel) {
+    fn print(&mut self, lint: &Lint, level: LintLevel) {
         let len = u16::try_from(match level.letter() {
             Some(_) => "-W".len(),
             None => "--".len() + level.as_str().len() + '='.len_utf8(),
-        } + 2 * '"'.len_utf8() + lint.len() + ", ".len()).unwrap();
+        } + 2 * '"'.len_utf8() + lint.as_str().len() + ", ".len()).unwrap();
         
         if self.col + len > self.max_line_len {
             println!();
@@ -89,7 +89,7 @@ impl Printer for CargoConfigPrinter {
 impl Printer for RustcPrinter {
     fn print_banner(&mut self) {}
     
-    fn print(&mut self, lint: &str, level: LintLevel) {
+    fn print(&mut self, lint: &Lint, level: LintLevel) {
         print!("{} ", level.as_arg(lint));
     }
 }
