@@ -1,6 +1,6 @@
 [build]
 rustflags = [
-    # Written for rustc 1.98.0 (88d9e12ae 2026-08-18)
+    # Written for rustc 1.98.1 (48a229cea 2026-09-01)
     "-Dambiguous_glob_imported_traits", "-Dambiguous_import_visibilities", "-Wambiguous_negative_literals",
     "-Dambiguous_panic_imports", "-Dc_void_returns", "-Wclosure_returning_async_block", "-Wderef_into_dyn_supertrait",
     "-Welided_lifetimes_in_paths", "-Wexplicit_outlives_requirements", "-Wffi_unwind_calls",
